@@ -1,0 +1,6 @@
+@TrocaItens.Api_HostAddress = http://localhost:5015
+
+GET {{TrocaItens.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
