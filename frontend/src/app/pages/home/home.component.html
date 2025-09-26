@@ -1,14 +1,61 @@
-<div class="p-8 bg-background text-foreground min-h-screen">
-  <div class="flex justify-between items-center">
-    <h1 class="text-3xl font-bold font-heading text-primary">
-      Rede Solidária
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <section class="text-center py-16">
+    <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-primary">
+      Bem-vindo(a) à Trocaliza!
     </h1>
-    <button (click)="logout()"
-      class="px-4 py-2 font-semibold text-destructive-foreground bg-destructive rounded-md hover:bg-destructive/90">
-      Sair
-    </button>
-  </div>
-  <p class="mt-4 text-muted-foreground">
-    Bem-vindo à página principal! Conteúdo para usuários logados aparecerá aqui.
-  </p>
+    <p class="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+      Sua rede comunitária para trocas e doações. Juntos, promovemos a sustentabilidade, a solidariedade e o apoio
+      mútuo em nossa comunidade.
+    </p>
+    <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a mat-flat-button color="primary" routerLink="/postagens" class="w-full sm:w-auto">
+        <mat-icon>dynamic_feed</mat-icon>
+        <span class="ml-2">Ver Postagens</span>
+      </a>
+      <a mat-stroked-button color="primary" routerLink="/minhas-postagens" class="w-full sm:w-auto">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span class="ml-2">Anunciar um Item</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="text-3xl font-bold text-center font-heading">Como Funciona</h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+
+      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
+        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
+          <mat-icon class="text-primary text-4xl">post_add</mat-icon>
+        </div>
+        <h3 class="mt-6 text-xl font-bold font-heading">1. Anuncie</h3>
+        <p class="mt-2 text-muted-foreground">
+          Crie uma postagem para o item que você deseja trocar ou doar. É simples, rápido e ajuda a dar uma nova vida
+          aos seus objetos.
+        </p>
+      </div>
+
+      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
+        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
+          <mat-icon class="text-primary text-4xl">travel_explore</mat-icon>
+        </div>
+        <h3 class="mt-6 text-xl font-bold font-heading">2. Explore</h3>
+        <p class="mt-2 text-muted-foreground">
+          Navegue pelas postagens de outros membros da comunidade. Use filtros para encontrar exatamente o que você
+          procura.
+        </p>
+      </div>
+
+      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
+        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
+          <mat-icon class="text-primary text-4xl">handshake</mat-icon>
+        </div>
+        <h3 class="mt-6 text-xl font-bold font-heading">3. Conecte-se</h3>
+        <p class="mt-2 text-muted-foreground">
+          Encontrou algo interessante? Entre em contato com o anunciante através de comentários para combinar a troca
+          ou doação.
+        </p>
+      </div>
+
+    </div>
+  </section>
 </div>

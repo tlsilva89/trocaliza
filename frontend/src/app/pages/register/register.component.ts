@@ -1,14 +1,26 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle.component';
+import { CommonModule } from '@angular/common';
+
+export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('senha');
+  const confirmPassword = control.get('confirmarSenha');
+
+  if (password && confirmPassword && password.value !== confirmPassword.value) {
+    return { passwordMismatch: true };
+  }
+  return null;
+};
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, ThemeToggleComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -23,7 +35,8 @@ export class RegisterComponent {
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]],
-    });
+      confirmarSenha: ['', [Validators.required]],
+    }, { validators: passwordMatchValidator });
   }
 
   onSubmit(): void {

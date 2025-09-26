@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './services/auth.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { PostagensComponent } from './pages/postagens/postagens.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'home', component: HomeComponent },
+      { path: 'postagens', component: PostagensComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },

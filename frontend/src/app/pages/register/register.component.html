@@ -1,29 +1,38 @@
+<div class="fixed top-4 right-4 z-10">
+  <app-theme-toggle></app-theme-toggle>
+</div>
 <div class="flex items-center justify-center min-h-screen bg-background text-foreground">
   <div class="w-full max-w-md p-8 space-y-6 bg-card text-card-foreground rounded-lg shadow-md border border-border">
     <div class="text-center">
       <h2 class="text-3xl font-bold font-heading text-primary">Crie sua Conta</h2>
       <p class="text-muted-foreground">É rápido e fácil!</p>
     </div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
       <div>
         <label for="nome" class="block text-sm font-medium text-muted-foreground">Nome</label>
         <input id="nome" type="text" formControlName="nome"
-          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring"
-          required>
+          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring">
       </div>
       <div>
         <label for="email" class="block text-sm font-medium text-muted-foreground">Email</label>
         <input id="email" type="email" formControlName="email"
-          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring"
-          required>
+          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring">
       </div>
       <div>
         <label for="senha" class="block text-sm font-medium text-muted-foreground">Senha</label>
         <input id="senha" type="password" formControlName="senha"
-          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring"
-          required>
+          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring">
       </div>
       <div>
+        <label for="confirmarSenha" class="block text-sm font-medium text-muted-foreground">Confirmar Senha</label>
+        <input id="confirmarSenha" type="password" formControlName="confirmarSenha"
+          class="w-full px-3 py-2 mt-1 bg-input border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring">
+        <div *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmarSenha')?.touched"
+          class="text-red-500 text-xs mt-1">
+          As senhas não conferem.
+        </div>
+      </div>
+      <div class="pt-2">
         <button type="submit" [disabled]="!registerForm.valid"
           class="w-full px-4 py-2 font-bold text-primary-foreground bg-primary rounded-md hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">
           Cadastrar

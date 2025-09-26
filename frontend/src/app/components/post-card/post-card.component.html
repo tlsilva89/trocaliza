@@ -1,0 +1,29 @@
+<mat-card class="w-full bg-card text-card-foreground border border-border shadow-lg transition-shadow hover:shadow-xl">
+  <mat-card-header>
+    <div mat-card-avatar class="bg-primary text-primary-foreground flex items-center justify-center font-bold">
+      {{ post.nomeUsuario.charAt(0) }}
+    </div>
+    <mat-card-title class="font-heading">{{ post.titulo }}</mat-card-title>
+    <mat-card-subtitle class="text-muted-foreground">{{ post.nomeUsuario }} - {{ post.criadoEm | date:'short' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="mt-4">
+    <p>
+      {{ post.descricao }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary">
+      <mat-icon>thumb_up_off_alt</mat-icon>
+      <span class="ml-2">Gostei</span>
+    </button>
+    <button mat-button color="primary" (click)="openPostDialog()">
+      <mat-icon>comment</mat-icon>
+      <span class="ml-2">Comentar</span>
+    </button>
+    <span class="flex-auto"></span>
+    <span class="px-3 py-1 text-xs font-semibold text-secondary-foreground bg-secondary rounded-full">
+      {{ post.categoria }}
+    </span>
+  </mat-card-actions>
+</mat-card>
