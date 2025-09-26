@@ -140,3 +140,4 @@
 /home/thiago/Documentos/rede-solidaria/backend/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/thiago/Documentos/rede-solidaria/backend/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/thiago/Documentos/rede-solidaria/backend/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/thiago/Documentos/rede-solidaria/backend/obj/Debug/net9.0/TrocaItens.Api.sourcelink.json

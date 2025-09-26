@@ -1,8 +1,8 @@
 import {
   BrowserModule,
   DomRendererFactory2
-} from "./chunk-KEKS2P22.js";
-import "./chunk-7V2SE7YY.js";
+} from "./chunk-GHWHUL72.js";
+import "./chunk-E5T6K5YD.js";
 import "./chunk-ZJ25XCV3.js";
 import {
   ANIMATION_MODULE_TYPE,
