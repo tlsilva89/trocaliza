@@ -61,7 +61,7 @@ export class PostDetailComponent implements OnInit {
     const postId = this.post()?.id;
     if (!postId || !this.comentario.trim()) return;
 
-    this.postService.addComment(postId, this.comentario).subscribe({
+    this.postService.addComment(postId, { conteudo: this.comentario }).subscribe({
       next: () => {
         this.notificationService.showSuccess('Comentário adicionado!');
         this.comentario = '';

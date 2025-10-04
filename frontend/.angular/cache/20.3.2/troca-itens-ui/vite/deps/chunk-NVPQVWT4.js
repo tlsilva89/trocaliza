@@ -1,6 +1,6 @@
 import {
   MediaMatcher
-} from "./chunk-LCJBB3B7.js";
+} from "./chunk-HBPBWYLT.js";
 import {
   ANIMATION_MODULE_TYPE,
   InjectionToken,
@@ -10,19 +10,6 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule
 } from "./chunk-A54MXSQZ.js";
-
-// node_modules/@angular/cdk/fesm2022/css-pixel-value.mjs
-function coerceCssPixelValue(value) {
-  if (value == null) {
-    return "";
-  }
-  return typeof value === "string" ? value : `${value}px`;
-}
-
-// node_modules/@angular/cdk/fesm2022/coercion.mjs
-function coerceBooleanProperty(value) {
-  return value != null && `${value}` !== "false";
-}
 
 // node_modules/@angular/cdk/fesm2022/layout.mjs
 var LayoutModule = class _LayoutModule {
@@ -71,6 +58,19 @@ function _animationsDisabled() {
   return _getAnimationsState() !== "enabled";
 }
 
+// node_modules/@angular/cdk/fesm2022/css-pixel-value.mjs
+function coerceCssPixelValue(value) {
+  if (value == null) {
+    return "";
+  }
+  return typeof value === "string" ? value : `${value}px`;
+}
+
+// node_modules/@angular/cdk/fesm2022/coercion.mjs
+function coerceBooleanProperty(value) {
+  return value != null && `${value}` !== "false";
+}
+
 // node_modules/@angular/cdk/fesm2022/test-environment.mjs
 function _isTestEnvironment() {
   return (
@@ -82,71 +82,11 @@ function _isTestEnvironment() {
   );
 }
 
-// node_modules/@angular/cdk/fesm2022/scrolling2.mjs
-var RtlScrollAxisType;
-(function(RtlScrollAxisType2) {
-  RtlScrollAxisType2[RtlScrollAxisType2["NORMAL"] = 0] = "NORMAL";
-  RtlScrollAxisType2[RtlScrollAxisType2["NEGATED"] = 1] = "NEGATED";
-  RtlScrollAxisType2[RtlScrollAxisType2["INVERTED"] = 2] = "INVERTED";
-})(RtlScrollAxisType || (RtlScrollAxisType = {}));
-var rtlScrollAxisType;
-var scrollBehaviorSupported;
-function supportsScrollBehavior() {
-  if (scrollBehaviorSupported == null) {
-    if (typeof document !== "object" || !document || typeof Element !== "function" || !Element) {
-      scrollBehaviorSupported = false;
-      return scrollBehaviorSupported;
-    }
-    if ("scrollBehavior" in document.documentElement.style) {
-      scrollBehaviorSupported = true;
-    } else {
-      const scrollToFunction = Element.prototype.scrollTo;
-      if (scrollToFunction) {
-        scrollBehaviorSupported = !/\{\s*\[native code\]\s*\}/.test(scrollToFunction.toString());
-      } else {
-        scrollBehaviorSupported = false;
-      }
-    }
-  }
-  return scrollBehaviorSupported;
-}
-function getRtlScrollAxisType() {
-  if (typeof document !== "object" || !document) {
-    return RtlScrollAxisType.NORMAL;
-  }
-  if (rtlScrollAxisType == null) {
-    const scrollContainer = document.createElement("div");
-    const containerStyle = scrollContainer.style;
-    scrollContainer.dir = "rtl";
-    containerStyle.width = "1px";
-    containerStyle.overflow = "auto";
-    containerStyle.visibility = "hidden";
-    containerStyle.pointerEvents = "none";
-    containerStyle.position = "absolute";
-    const content = document.createElement("div");
-    const contentStyle = content.style;
-    contentStyle.width = "2px";
-    contentStyle.height = "1px";
-    scrollContainer.appendChild(content);
-    document.body.appendChild(scrollContainer);
-    rtlScrollAxisType = RtlScrollAxisType.NORMAL;
-    if (scrollContainer.scrollLeft === 0) {
-      scrollContainer.scrollLeft = 1;
-      rtlScrollAxisType = scrollContainer.scrollLeft === 0 ? RtlScrollAxisType.NEGATED : RtlScrollAxisType.INVERTED;
-    }
-    scrollContainer.remove();
-  }
-  return rtlScrollAxisType;
-}
-
 export {
   _isTestEnvironment,
-  coerceCssPixelValue,
-  RtlScrollAxisType,
-  supportsScrollBehavior,
-  getRtlScrollAxisType,
-  coerceBooleanProperty,
   Breakpoints,
-  _animationsDisabled
+  _animationsDisabled,
+  coerceCssPixelValue,
+  coerceBooleanProperty
 };
-//# sourceMappingURL=chunk-Q747N45I.js.map
+//# sourceMappingURL=chunk-NVPQVWT4.js.map

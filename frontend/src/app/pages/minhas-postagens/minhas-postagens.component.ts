@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { NotificationService } from '../../services/notification.service';
-import { Post } from '../../models/post.model';
+import { Post, CreatePost, UpdatePost } from '../../models/post.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-minhas-postagens',
@@ -31,7 +31,6 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 export class MinhasPostagensComponent implements OnInit {
   private postService = inject(PostService);
   private notificationService = inject(NotificationService);
-  private dialog = inject(MatDialog);
 
   myPosts = signal<Post[]>([]);
   isLoading = signal(true);
@@ -40,7 +39,7 @@ export class MinhasPostagensComponent implements OnInit {
 
   readonly categories = ['Móveis', 'Eletrônicos', 'Vestuário', 'Livros', 'Outros'];
 
-  formData = {
+  formData: CreatePost = {
     titulo: '',
     descricao: '',
     categoria: ''

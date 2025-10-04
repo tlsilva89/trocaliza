@@ -1,0 +1,39 @@
+.custom-snackbar {
+  font-weight: 500;
+  
+  &.success-snackbar {
+    background-color: #10b981 !important;
+    color: white !important;
+    
+    .mat-mdc-snack-bar-action {
+      color: white !important;
+    }
+  }
+  
+  &.error-snackbar {
+    background-color: #ef4444 !important;
+    color: white !important;
+    
+    .mat-mdc-snack-bar-action {
+      color: white !important;
+    }
+  }
+  
+  &.warning-snackbar {
+    background-color: #f59e0b !important;
+    color: white !important;
+    
+    .mat-mdc-snack-bar-action {
+      color: white !important;
+    }
+  }
+  
+  &.info-snackbar {
+    background-color: #3b82f6 !important;
+    color: white !important;
+    
+    .mat-mdc-snack-bar-action {
+      color: white !important;
+    }
+  }
+}

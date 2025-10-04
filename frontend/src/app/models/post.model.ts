@@ -18,3 +18,19 @@ export interface Comment {
   usuarioId: number;
   nomeUsuario: string;
 }
+
+export interface CreatePost {
+  titulo: string;
+  descricao: string;
+  categoria: string;
+}
+
+export interface UpdatePost {
+  titulo: string;
+  descricao: string;
+  categoria: string;
+}
+
+export interface CreateComment {
+  conteudo: string;
+}
