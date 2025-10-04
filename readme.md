@@ -5,8 +5,8 @@
 Trocaliza é uma plataforma web desenvolvida para promover a economia circular e a solidariedade através de trocas e doações de itens entre membros da comunidade. O projeto incentiva a sustentabilidade, reduz o desperdício e fortalece os laços comunitários.
 
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Angular](https://img.shields.io/badge/Angular-18-red)
-![.NET](https://img.shields.io/badge/.NET-8.0-purple)
+![Angular](https://img.shields.io/badge/Angular-20-red)
+![.NET](https://img.shields.io/badge/.NET-9.0-purple)
 
 ---
 
