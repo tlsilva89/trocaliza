@@ -31,4 +31,12 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authToken');
   }
+
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile`);
+  }
+
+  updateProfile(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/profile`, data);
+  }
 }

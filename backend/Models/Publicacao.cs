@@ -6,6 +6,7 @@ public class Publicacao
     public required string Titulo { get; set; }
     public required string Descricao { get; set; }
     public required string Categoria { get; set; }
+    public string? ImagemUrl { get; set; }
     public DateTime CriadoEm { get; set; }
     public DateTime AtualizadoEm { get; set; }
     public int UsuarioId { get; set; }

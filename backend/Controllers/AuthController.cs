@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TrocaItens.Api.Data;
 using TrocaItens.Api.DTOs;
 using TrocaItens.Api.Models;
@@ -54,5 +56,51 @@ public class AuthController : ControllerBase
         var token = _tokenService.CreateToken(user);
 
         return Ok(new { token });
+    }
+
+    [HttpGet("profile")]
+    [Authorize]
+    public async Task<IActionResult> GetProfile()
+    {
+        var usuarioId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+        var user = await _context.Usuarios.FindAsync(usuarioId);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new
+        {
+            id = user.Id,
+            nome = user.Nome,
+            email = user.Email,
+            criadoEm = user.CriadoEm
+        });
+    }
+
+    [HttpPut("profile")]
+    [Authorize]
+    public async Task<IActionResult> UpdateProfile(UpdateProfileDto updateDto)
+    {
+        var usuarioId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+        var user = await _context.Usuarios.FindAsync(usuarioId);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        if (updateDto.Email != user.Email && await _context.Usuarios.AnyAsync(u => u.Email == updateDto.Email))
+        {
+            return BadRequest("Este email já está em uso.");
+        }
+
+        user.Nome = updateDto.Nome;
+        user.Email = updateDto.Email;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Perfil atualizado com sucesso!" });
     }
 }

@@ -1,0 +1,84 @@
+<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+  <a mat-button routerLink="/postagens" class="mb-4">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar
+  </a>
+
+  <div *ngIf="isLoading()" class="animate-pulse mt-6">
+    <div class="h-8 bg-muted rounded w-3/4 mb-4"></div>
+    <div class="h-4 bg-muted rounded w-1/2 mb-8"></div>
+    <div class="h-32 bg-muted rounded mb-4"></div>
+  </div>
+
+  <div *ngIf="!isLoading() && post()" class="mt-6">
+    <mat-card class="mb-8">
+      <mat-card-header>
+        <div class="flex items-center mb-4">
+          <mat-icon class="mr-2 text-primary">person</mat-icon>
+          <div>
+            <mat-card-title class="!mb-1">{{ post()!.titulo }}</mat-card-title>
+            <mat-card-subtitle>
+              Por {{ post()!.nomeUsuario }} •
+              {{ post()!.criadoEm | date:'dd/MM/yyyy HH:mm' }} •
+              <span class="inline-block px-2 py-1 bg-primary/10 text-primary rounded-md text-xs">
+                {{ post()!.categoria }}
+              </span>
+            </mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="text-lg mt-4 whitespace-pre-wrap">{{ post()!.descricao }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="bg-card border border-border rounded-lg p-6">
+      <h2 class="text-2xl font-bold font-heading mb-6">
+        Comentários ({{ post()!.comentarios.length }})
+      </h2>
+
+      <div *ngIf="authService.isAuthenticated()" class="mb-8">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Adicionar comentário</mat-label>
+          <textarea matInput [(ngModel)]="comentario" rows="3" placeholder="Escreva seu comentário...">
+          </textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addComment()" [disabled]="!comentario.trim()">
+          <mat-icon>send</mat-icon>
+          Comentar
+        </button>
+      </div>
+
+      <div *ngIf="!authService.isAuthenticated()" class="mb-8 p-4 bg-muted rounded-lg text-center">
+        <p class="text-muted-foreground mb-4">Faça login para comentar</p>
+        <a mat-raised-button color="primary" routerLink="/login">
+          Fazer Login
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        <div *ngIf="post()!.comentarios.length === 0" class="text-center py-8">
+          <mat-icon class="text-5xl text-muted-foreground">chat_bubble_outline</mat-icon>
+          <p class="text-muted-foreground mt-2">Nenhum comentário ainda. Seja o primeiro!</p>
+        </div>
+
+        <mat-card *ngFor="let comment of post()!.comentarios" class="!shadow-sm">
+          <mat-card-content>
+            <div class="flex items-start">
+              <mat-icon class="mr-3 text-muted-foreground">account_circle</mat-icon>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-1">
+                  <p class="font-semibold">{{ comment.nomeUsuario }}</p>
+                  <p class="text-xs text-muted-foreground">
+                    {{ comment.criadoEm | date:'dd/MM/yyyy HH:mm' }}
+                  </p>
+                </div>
+                <p class="text-sm whitespace-pre-wrap">{{ comment.conteudo }}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "N3ZxpDcfMxg=",
+  "dgSpecHash": "OFjDIexGYXs=",
   "success": true,
   "projectFilePath": "/home/thiago/Documentos/rede-solidaria/backend/TrocaItens.Api.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "/home/thiago/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.9/microsoft.entityframeworkcore.analyzers.9.0.9.nupkg.sha512",
     "/home/thiago/.nuget/packages/microsoft.entityframeworkcore.design/9.0.9/microsoft.entityframeworkcore.design.9.0.9.nupkg.sha512",
     "/home/thiago/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.9/microsoft.entityframeworkcore.relational.9.0.9.nupkg.sha512",
+    "/home/thiago/.nuget/packages/microsoft.entityframeworkcore.tools/9.0.9/microsoft.entityframeworkcore.tools.9.0.9.nupkg.sha512",
     "/home/thiago/.nuget/packages/microsoft.extensions.apidescription.server/9.0.0/microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
     "/home/thiago/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.9/microsoft.extensions.caching.abstractions.9.0.9.nupkg.sha512",
     "/home/thiago/.nuget/packages/microsoft.extensions.caching.memory/9.0.9/microsoft.extensions.caching.memory.9.0.9.nupkg.sha512",
