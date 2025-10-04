@@ -1,43 +1,69 @@
-<aside
-  class="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-card border-r border-border rtl:border-r-0 rtl:border-l">
-  <a routerLink="/home" class="text-3xl font-bold font-heading text-primary">
-    Trocaliza
-  </a>
+<aside class="fixed left-0 top-0 flex flex-col w-72 h-screen bg-card border-r border-border shadow-xl z-40">
+  <div class="px-6 py-6 border-b border-border flex-shrink-0">
+    <a routerLink="/home" class="flex items-center space-x-3 group">
+      <div
+        class="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+        <mat-icon class="text-primary">recycling</mat-icon>
+      </div>
+      <span class="text-2xl font-bold font-heading text-primary tracking-tight">Trocaliza</span>
+    </a>
+  </div>
 
-  <div class="flex flex-col justify-between flex-1 mt-6">
-    <nav class="flex-1 -mx-3 space-y-3">
-      <a class="flex items-center px-3 py-2 text-muted-foreground transition-colors duration-300 transform rounded-lg hover:bg-muted"
-        routerLink="/home" routerLinkActive="bg-muted text-primary" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon class="w-5 h-5" aria-hidden="false" fontIcon="home"></mat-icon>
-        <span class="mx-2 text-sm font-medium">Início</span>
+  <div class="flex flex-col flex-1 px-4 py-6 overflow-y-auto">
+    <nav class="flex-1 space-y-2">
+      <a class="nav-link group" routerLink="/home" routerLinkActive="nav-link-active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <div class="flex items-center space-x-3">
+          <div class="nav-icon-wrapper">
+            <mat-icon class="nav-icon">home</mat-icon>
+          </div>
+          <span class="nav-text">Início</span>
+        </div>
+        <mat-icon class="nav-arrow">chevron_right</mat-icon>
       </a>
 
-      <a class="flex items-center px-3 py-2 text-muted-foreground transition-colors duration-300 transform rounded-lg hover:bg-muted"
-        routerLink="/postagens" routerLinkActive="bg-muted text-primary">
-        <mat-icon class="w-5 h-5" aria-hidden="false" fontIcon="dynamic_feed"></mat-icon>
-        <span class="mx-2 text-sm font-medium">Postagens</span>
+      <a class="nav-link group" routerLink="/postagens" routerLinkActive="nav-link-active">
+        <div class="flex items-center space-x-3">
+          <div class="nav-icon-wrapper">
+            <mat-icon class="nav-icon">grid_view</mat-icon>
+          </div>
+          <span class="nav-text">Explorar</span>
+        </div>
+        <mat-icon class="nav-arrow">chevron_right</mat-icon>
       </a>
 
-      <a class="flex items-center px-3 py-2 text-muted-foreground transition-colors duration-300 transform rounded-lg hover:bg-muted"
-        routerLink="/minhas-postagens" routerLinkActive="bg-muted text-primary">
-        <mat-icon class="w-5 h-5" aria-hidden="false" fontIcon="inventory_2"></mat-icon>
-        <span class="mx-2 text-sm font-medium">Minhas Postagens</span>
+      <a class="nav-link group" routerLink="/minhas-postagens" routerLinkActive="nav-link-active">
+        <div class="flex items-center space-x-3">
+          <div class="nav-icon-wrapper">
+            <mat-icon class="nav-icon">inventory_2</mat-icon>
+          </div>
+          <span class="nav-text">Minhas Postagens</span>
+        </div>
+        <mat-icon class="nav-arrow">chevron_right</mat-icon>
       </a>
 
-      <a class="flex items-center px-3 py-2 text-muted-foreground transition-colors duration-300 transform rounded-lg hover:bg-muted"
-        routerLink="/perfil" routerLinkActive="bg-muted text-primary">
-        <mat-icon class="w-5 h-5" aria-hidden="false" fontIcon="person"></mat-icon>
-        <span class="mx-2 text-sm font-medium">Meu Perfil</span>
+      <a class="nav-link group" routerLink="/perfil" routerLinkActive="nav-link-active">
+        <div class="flex items-center space-x-3">
+          <div class="nav-icon-wrapper">
+            <mat-icon class="nav-icon">person</mat-icon>
+          </div>
+          <span class="nav-text">Perfil</span>
+        </div>
+        <mat-icon class="nav-arrow">chevron_right</mat-icon>
       </a>
     </nav>
 
-    <div class="mt-6">
-      <div class="flex items-center justify-between mt-6">
+    <div class="mt-auto pt-6 border-t border-border space-y-4 flex-shrink-0">
+      <div class="flex items-center justify-between px-3">
+        <span class="text-sm font-medium text-muted-foreground">Tema</span>
         <app-theme-toggle></app-theme-toggle>
-        <button (click)="logout()" mat-icon-button aria-label="Sair">
-          <mat-icon class="text-destructive">logout</mat-icon>
-        </button>
       </div>
+
+      <button (click)="logout()"
+        class="w-full flex items-center space-x-3 px-3 py-3 text-destructive hover:bg-destructive/10 rounded-lg transition-colors group">
+        <mat-icon class="group-hover:scale-110 transition-transform">logout</mat-icon>
+        <span class="font-medium">Sair</span>
+      </button>
     </div>
   </div>
 </aside>

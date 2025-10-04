@@ -1,6 +1,12 @@
-<div class="flex h-screen bg-background">
+<div class="flex min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
   <app-sidebar></app-sidebar>
-  <main class="flex-1 h-full overflow-y-auto">
-    <router-outlet></router-outlet>
+
+  <!-- Overlay para mobile -->
+  <div class="fixed inset-0 bg-black/50 lg:hidden z-30 backdrop-blur-sm hidden" id="sidebar-overlay"></div>
+
+  <main class="flex-1 lg:ml-72 overflow-y-auto w-full">
+    <div class="animate-fade-in">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 </div>

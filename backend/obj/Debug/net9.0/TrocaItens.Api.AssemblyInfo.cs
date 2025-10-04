@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TrocaItens.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+609b161fe893a3c393f2cceb291e74d05762ebbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85c6e5b25130462588d68b9f98a57a79b73a41ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("TrocaItens.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TrocaItens.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

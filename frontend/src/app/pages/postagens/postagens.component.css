@@ -1,5 +1,12 @@
+.filter-button {
+  @apply text-muted-foreground;
+}
+
 .filter-button.active {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  font-weight: 600;
+  @apply bg-primary/10 text-primary font-semibold;
+  @apply border border-primary/20;
+}
+
+.filter-button:hover:not(.active) {
+  @apply bg-muted;
 }

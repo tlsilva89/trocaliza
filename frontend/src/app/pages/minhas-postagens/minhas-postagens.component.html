@@ -1,102 +1,202 @@
-<div class="container mx-auto p-4 sm:p-6 lg:p-8">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold font-heading text-primary">Minhas Publicações</h1>
-    <button mat-raised-button color="primary" (click)="toggleForm()">
+<div class="container mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+    <div>
+      <h1 class="text-4xl font-bold font-heading text-foreground">Minhas Publicações</h1>
+      <p class="text-muted-foreground mt-2">Gerencie seus anúncios e doações</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="toggleForm()" class="w-full sm:w-auto">
       <mat-icon>{{ showForm() ? 'close' : 'add' }}</mat-icon>
-      {{ showForm() ? 'Cancelar' : 'Nova Publicação' }}
+      <span class="ml-2">{{ showForm() ? 'Cancelar' : 'Nova Publicação' }}</span>
     </button>
   </div>
 
-  <mat-card *ngIf="showForm()" class="mb-6">
-    <mat-card-content>
-      <h2 class="text-xl font-bold font-heading mb-4">
-        {{ editingPost() ? 'Editar' : 'Nova' }} Publicação
-      </h2>
-      <form (ngSubmit)="submitPost()" class="space-y-4">
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label>Título</mat-label>
-          <input matInput [(ngModel)]="formData.titulo" name="titulo" required>
-        </mat-form-field>
+  <div *ngIf="showForm()" class="mb-8 animate-slide-up">
+    <div class="card-elevated p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+          <mat-icon class="text-primary">{{ editingPost() ? 'edit' : 'post_add' }}</mat-icon>
+        </div>
+        <h2 class="text-2xl font-bold font-heading">
+          {{ editingPost() ? 'Editar Publicação' : 'Nova Publicação' }}
+        </h2>
+      </div>
 
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label>Descrição</mat-label>
-          <textarea matInput [(ngModel)]="formData.descricao" name="descricao" rows="6" required>
-          </textarea>
-        </mat-form-field>
+      <form (ngSubmit)="submitPost()" class="space-y-6">
+        <!-- Título -->
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-foreground">
+            <mat-icon class="inline-block align-middle mr-2 text-primary">title</mat-icon>
+            Título
+          </label>
+          <input type="text" [(ngModel)]="formData.titulo" name="titulo" placeholder="Ex: Sofá em ótimo estado"
+            class="input-field" required>
+        </div>
 
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label>Categoria</mat-label>
-          <mat-select [(ngModel)]="formData.categoria" name="categoria" required>
-            <mat-option *ngFor="let cat of categories" [value]="cat">
-              {{ cat }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <!-- Descrição -->
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-foreground">
+            <mat-icon class="inline-block align-middle mr-2 text-primary">description</mat-icon>
+            Descrição
+          </label>
+          <textarea [(ngModel)]="formData.descricao" name="descricao" rows="6"
+            placeholder="Descreva o item detalhadamente..." class="input-field resize-none" required></textarea>
+        </div>
 
-        <div class="flex gap-2">
-          <button mat-raised-button color="primary" type="submit">
+        <!-- Categoria -->
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-foreground">
+            <mat-icon class="inline-block align-middle mr-2 text-primary">category</mat-icon>
+            Categoria
+          </label>
+          <select [(ngModel)]="formData.categoria" name="categoria" class="input-field" required>
+            <option value="" disabled selected>Selecione uma categoria</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+        </div>
+
+        <!-- Upload de Imagem -->
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-foreground">
+            <mat-icon class="inline-block align-middle mr-2 text-primary">image</mat-icon>
+            Imagem (opcional)
+          </label>
+          <div class="flex items-center gap-4">
+            <label class="flex-1 cursor-pointer">
+              <div
+                class="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg hover:border-primary hover:bg-primary/5 transition-colors">
+                <mat-icon class="text-muted-foreground">cloud_upload</mat-icon>
+                <span class="text-sm text-muted-foreground">
+                  {{ selectedImage ? selectedImage.name : 'Clique para selecionar uma imagem' }}
+                </span>
+              </div>
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" class="hidden">
+            </label>
+            <button *ngIf="selectedImage" type="button" (click)="removeImage()" mat-icon-button color="warn">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+
+          <!-- Preview da Imagem -->
+          <div *ngIf="imagePreview" class="mt-4">
+            <div class="relative inline-block rounded-lg overflow-hidden border border-border">
+              <img [src]="imagePreview" alt="Preview" class="max-h-64 object-cover">
+              <button type="button" (click)="removeImage()"
+                class="absolute top-2 right-2 p-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90 transition-colors">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex gap-3 pt-4 border-t border-border">
+          <button mat-raised-button color="primary" type="submit" class="flex-1 sm:flex-none px-8"
+            [disabled]="!formData.titulo || !formData.descricao || !formData.categoria">
             <mat-icon>{{ editingPost() ? 'save' : 'add' }}</mat-icon>
-            {{ editingPost() ? 'Atualizar' : 'Criar' }}
+            <span class="ml-2">{{ editingPost() ? 'Atualizar' : 'Publicar' }}</span>
           </button>
-          <button mat-stroked-button type="button" (click)="toggleForm()">
-            Cancelar
+          <button mat-stroked-button type="button" (click)="toggleForm()" class="flex-1 sm:flex-none">
+            <mat-icon>close</mat-icon>
+            <span class="ml-2">Cancelar</span>
           </button>
         </div>
       </form>
-    </mat-card-content>
-  </mat-card>
-
-  <div *ngIf="isLoading()" class="space-y-4">
-    <div *ngFor="let i of [1,2,3]" class="animate-pulse">
-      <div class="h-40 bg-muted rounded-lg"></div>
     </div>
   </div>
 
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="space-y-4">
+    <div *ngFor="let i of [1,2,3]" class="card-elevated p-6 animate-pulse">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 rounded-lg bg-muted"></div>
+        <div class="flex-1 space-y-2">
+          <div class="h-4 bg-muted rounded w-3/4"></div>
+          <div class="h-3 bg-muted rounded w-1/2"></div>
+        </div>
+      </div>
+      <div class="h-20 bg-muted rounded"></div>
+    </div>
+  </div>
+
+  <!-- Lista de Posts -->
   <div *ngIf="!isLoading()">
-    <div *ngIf="myPosts().length > 0; else noPosts" class="space-y-4">
-      <mat-card *ngFor="let post of myPosts()">
-        <mat-card-header>
-          <div class="flex items-center">
-            <mat-icon class="mr-2 text-primary">article</mat-icon>
-            <div class="flex-1">
-              <mat-card-title>{{ post.titulo }}</mat-card-title>
-              <mat-card-subtitle>
-                {{ post.criadoEm | date:'dd/MM/yyyy HH:mm' }} • {{ post.categoria }} •
-                {{ post.comentarios.length }} comentário(s)
-              </mat-card-subtitle>
+    <div *ngIf="myPosts().length > 0; else noPosts" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div *ngFor="let post of myPosts()"
+        class="card-elevated overflow-hidden group hover:shadow-elegant-xl transition-all animate-slide-up">
+        <!-- Imagem do Post -->
+        <div *ngIf="post.imagemUrl" class="relative h-48 bg-muted overflow-hidden">
+          <img [src]="getImageUrl(post.imagemUrl)" [alt]="post.titulo"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        </div>
+
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3 flex-1 min-w-0">
+              <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <mat-icon class="text-primary">article</mat-icon>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-bold text-lg line-clamp-1 group-hover:text-primary transition-colors">
+                  {{ post.titulo }}
+                </h3>
+                <p class="text-xs text-muted-foreground">
+                  {{ post.criadoEm | date:'dd/MM/yyyy' }}
+                </p>
+              </div>
             </div>
           </div>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="line-clamp-3">{{ post.descricao }}</p>
-        </mat-card-content>
-        <mat-card-actions class="flex gap-2">
-          <button mat-button (click)="editPost(post)">
-            <mat-icon>edit</mat-icon>
-            Editar
-          </button>
-          <button mat-button color="warn" (click)="deletePost(post.id)">
-            <mat-icon>delete</mat-icon>
-            Excluir
-          </button>
-          <button mat-button [routerLink]="['/postagens', post.id]">
-            <mat-icon>visibility</mat-icon>
-            Ver
-          </button>
-        </mat-card-actions>
-      </mat-card>
+
+          <div class="mb-4">
+            <p class="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+              {{ post.descricao }}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span
+              class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+              <mat-icon class="text-sm">label</mat-icon>
+              {{ post.categoria }}
+            </span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 bg-muted rounded-full text-xs">
+              <mat-icon class="text-sm">comment</mat-icon>
+              {{ post.comentarios.length }}
+            </span>
+          </div>
+
+          <div class="flex gap-2 pt-4 border-t border-border">
+            <button mat-icon-button (click)="editPost(post)" class="hover:bg-primary/10 hover:text-primary"
+              title="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="['/postagens', post.id]"
+              class="hover:bg-primary/10 hover:text-primary" title="Visualizar">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <div class="flex-1"></div>
+            <button mat-icon-button color="warn" (click)="deletePost(post.id)" class="hover:bg-destructive/10"
+              title="Excluir">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Empty State -->
     <ng-template #noPosts>
-      <div class="text-center py-16 bg-card border border-border rounded-lg">
-        <mat-icon class="text-6xl text-muted-foreground mx-auto mb-4">post_add</mat-icon>
-        <h3 class="text-xl font-semibold mb-2">Nenhuma Publicação</h3>
-        <p class="text-muted-foreground mb-6">
-          Crie sua primeira publicação para começar a compartilhar!
+      <div class="text-center py-20 card-elevated">
+        <div class="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-muted/50 mb-6">
+          <mat-icon class="text-muted-foreground text-6xl">inventory_2</mat-icon>
+        </div>
+        <h3 class="text-2xl font-bold font-heading mb-3">Nenhuma Publicação</h3>
+        <p class="text-muted-foreground mb-8 max-w-md mx-auto">
+          Você ainda não criou nenhuma publicação. Comece compartilhando seus itens com a comunidade!
         </p>
-        <button mat-raised-button color="primary" (click)="toggleForm()">
+        <button mat-raised-button color="primary" (click)="toggleForm()" class="px-8">
           <mat-icon>add</mat-icon>
-          Criar Publicação
+          <span class="ml-2">Criar Primeira Publicação</span>
         </button>
       </div>
     </ng-template>

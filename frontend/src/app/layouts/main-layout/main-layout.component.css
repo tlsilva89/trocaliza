@@ -1,9 +1,15 @@
-a.bg-muted {
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--muted) / var(--tw-bg-opacity));
-}
-
-a.text-primary {
-  --tw-text-opacity: 1;
-  color: hsl(var(--primary) / var(--tw-text-opacity));
+/* Responsividade para mobile */
+@media (max-width: 1023px) {
+  main {
+    margin-left: 0 !important;
+  }
+  
+  app-sidebar aside {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  app-sidebar aside.open {
+    transform: translateX(0);
+  }
 }

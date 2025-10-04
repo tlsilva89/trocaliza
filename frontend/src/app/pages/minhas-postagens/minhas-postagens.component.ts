@@ -7,10 +7,7 @@ import { NotificationService } from '../../services/notification.service';
 import { Post, CreatePost, UpdatePost } from '../../models/post.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-minhas-postagens',
@@ -21,10 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterLink,
     MatButtonModule,
     MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCardModule,
-    MatDialogModule
+    MatCardModule
   ],
   templateUrl: './minhas-postagens.component.html'
 })
@@ -36,6 +30,9 @@ export class MinhasPostagensComponent implements OnInit {
   isLoading = signal(true);
   showForm = signal(false);
   editingPost = signal<Post | null>(null);
+
+  selectedImage: File | null = null;
+  imagePreview: string | null = null;
 
   readonly categories = ['Móveis', 'Eletrônicos', 'Vestuário', 'Livros', 'Outros'];
 
@@ -77,6 +74,41 @@ export class MinhasPostagensComponent implements OnInit {
       categoria: ''
     };
     this.editingPost.set(null);
+    this.selectedImage = null;
+    this.imagePreview = null;
+  }
+
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      
+      // Validar tamanho (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        this.notificationService.showError('A imagem deve ter no máximo 5MB');
+        return;
+      }
+
+      // Validar tipo
+      if (!file.type.startsWith('image/')) {
+        this.notificationService.showError('Apenas imagens são permitidas');
+        return;
+      }
+
+      this.selectedImage = file;
+
+      // Criar preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeImage(): void {
+    this.selectedImage = null;
+    this.imagePreview = null;
   }
 
   editPost(post: Post): void {
@@ -87,20 +119,24 @@ export class MinhasPostagensComponent implements OnInit {
       categoria: post.categoria
     };
     this.showForm.set(true);
+    
+    // Scroll to form
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   submitPost(): void {
     if (!this.formData.titulo || !this.formData.descricao || !this.formData.categoria) {
-      this.notificationService.showError('Preencha todos os campos');
+      this.notificationService.showError('Preencha todos os campos obrigatórios');
       return;
     }
 
     const editingId = this.editingPost()?.id;
 
     if (editingId) {
-      this.postService.updatePost(editingId, this.formData).subscribe({
+      // Update
+      this.postService.updatePost(editingId, this.formData, this.selectedImage || undefined).subscribe({
         next: () => {
-          this.notificationService.showSuccess('Publicação atualizada!');
+          this.notificationService.showSuccess('Publicação atualizada com sucesso!');
           this.loadMyPosts();
           this.toggleForm();
         },
@@ -109,9 +145,10 @@ export class MinhasPostagensComponent implements OnInit {
         }
       });
     } else {
-      this.postService.createPost(this.formData).subscribe({
+      // Create
+      this.postService.createPost(this.formData, this.selectedImage || undefined).subscribe({
         next: () => {
-          this.notificationService.showSuccess('Publicação criada!');
+          this.notificationService.showSuccess('Publicação criada com sucesso!');
           this.loadMyPosts();
           this.toggleForm();
         },
@@ -126,7 +163,7 @@ export class MinhasPostagensComponent implements OnInit {
     if (confirm('Tem certeza que deseja excluir esta publicação?')) {
       this.postService.deletePost(id).subscribe({
         next: () => {
-          this.notificationService.showSuccess('Publicação excluída!');
+          this.notificationService.showSuccess('Publicação excluída com sucesso!');
           this.loadMyPosts();
         },
         error: () => {
@@ -134,5 +171,9 @@ export class MinhasPostagensComponent implements OnInit {
         }
       });
     }
+  }
+
+  getImageUrl(imagePath: string): string {
+    return this.postService.getImageUrl(imagePath);
   }
 }

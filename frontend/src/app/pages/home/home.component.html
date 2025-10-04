@@ -1,61 +1,99 @@
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <section class="text-center py-16">
-    <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-primary">
-      Bem-vindo(a) à Trocaliza!
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
+  <section class="text-center py-20">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/10 mb-6">
+      <mat-icon class="text-primary text-5xl">recycling</mat-icon>
+    </div>
+
+    <h1
+      class="text-5xl md:text-6xl font-extrabold font-heading mb-4 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+      Bem-vindo à Trocaliza!
     </h1>
-    <p class="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-      Sua rede comunitária para trocas e doações. Juntos, promovemos a sustentabilidade, a solidariedade e o apoio
-      mútuo em nossa comunidade.
+
+    <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed">
+      Sua rede comunitária para trocas e doações. Juntos, promovemos a <span
+        class="text-primary font-semibold">sustentabilidade</span>,
+      a solidariedade e o apoio mútuo.
     </p>
-    <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-      <a mat-flat-button color="primary" routerLink="/postagens" class="w-full sm:w-auto">
-        <mat-icon>dynamic_feed</mat-icon>
-        <span class="ml-2">Ver Postagens</span>
-      </a>
-      <a mat-stroked-button color="primary" routerLink="/minhas-postagens" class="w-full sm:w-auto">
+
+    <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+      <button mat-flat-button color="primary" routerLink="/postagens" class="w-full sm:w-auto px-8 py-3 text-base">
+        <mat-icon>explore</mat-icon>
+        <span class="ml-2">Explorar Postagens</span>
+      </button>
+      <button mat-stroked-button color="primary" routerLink="/minhas-postagens"
+        class="w-full sm:w-auto px-8 py-3 text-base">
         <mat-icon>add_circle_outline</mat-icon>
-        <span class="ml-2">Anunciar um Item</span>
-      </a>
+        <span class="ml-2">Criar Anúncio</span>
+      </button>
     </div>
   </section>
 
-  <section class="mt-20">
-    <h2 class="text-3xl font-bold text-center font-heading">Como Funciona</h2>
-    <div class="mt-12 grid gap-8 md:grid-cols-3">
+  <section class="mt-24">
+    <h2 class="text-4xl font-bold text-center font-heading mb-4">Como Funciona</h2>
+    <p class="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+      Compartilhar nunca foi tão fácil. Siga esses passos simples para começar.
+    </p>
 
-      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
-        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
-          <mat-icon class="text-primary text-4xl">post_add</mat-icon>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div
+        class="group relative card-elevated p-8 text-center hover:scale-105 transition-transform duration-300 animate-slide-up">
+        <div
+          class="flex items-center justify-center w-20 h-20 mx-auto rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
+          <mat-icon class="text-primary text-5xl">post_add</mat-icon>
         </div>
-        <h3 class="mt-6 text-xl font-bold font-heading">1. Anuncie</h3>
-        <p class="mt-2 text-muted-foreground">
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+          <span class="font-bold text-primary text-lg">1</span>
+        </div>
+        <h3 class="text-2xl font-bold font-heading mb-4">Anuncie</h3>
+        <p class="text-muted-foreground leading-relaxed">
           Crie uma postagem para o item que você deseja trocar ou doar. É simples, rápido e ajuda a dar uma nova vida
           aos seus objetos.
         </p>
       </div>
 
-      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
-        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
-          <mat-icon class="text-primary text-4xl">travel_explore</mat-icon>
+      <div
+        class="group relative card-elevated p-8 text-center hover:scale-105 transition-transform duration-300 animate-slide-up"
+        style="animation-delay: 0.1s;">
+        <div
+          class="flex items-center justify-center w-20 h-20 mx-auto rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
+          <mat-icon class="text-primary text-5xl">travel_explore</mat-icon>
         </div>
-        <h3 class="mt-6 text-xl font-bold font-heading">2. Explore</h3>
-        <p class="mt-2 text-muted-foreground">
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+          <span class="font-bold text-primary text-lg">2</span>
+        </div>
+        <h3 class="text-2xl font-bold font-heading mb-4">Explore</h3>
+        <p class="text-muted-foreground leading-relaxed">
           Navegue pelas postagens de outros membros da comunidade. Use filtros para encontrar exatamente o que você
           procura.
         </p>
       </div>
 
-      <div class="text-center p-8 bg-card border border-border rounded-lg shadow-lg">
-        <div class="flex items-center justify-center h-16 w-16 mx-auto bg-primary/10 rounded-full">
-          <mat-icon class="text-primary text-4xl">handshake</mat-icon>
+      <div
+        class="group relative card-elevated p-8 text-center hover:scale-105 transition-transform duration-300 animate-slide-up"
+        style="animation-delay: 0.2s;">
+        <div
+          class="flex items-center justify-center w-20 h-20 mx-auto rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
+          <mat-icon class="text-primary text-5xl">handshake</mat-icon>
         </div>
-        <h3 class="mt-6 text-xl font-bold font-heading">3. Conecte-se</h3>
-        <p class="mt-2 text-muted-foreground">
-          Encontrou algo interessante? Entre em contato com o anunciante através de comentários para combinar a troca
-          ou doação.
+        <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+          <span class="font-bold text-primary text-lg">3</span>
+        </div>
+        <h3 class="text-2xl font-bold font-heading mb-4">Conecte-se</h3>
+        <p class="text-muted-foreground leading-relaxed">
+          Encontrou algo interessante? Entre em contato através de comentários para combinar a troca ou doação.
         </p>
       </div>
-
     </div>
+  </section>
+
+  <section class="mt-24 glass-effect p-12 rounded-2xl text-center">
+    <mat-icon class="text-primary text-6xl mb-4">eco</mat-icon>
+    <h2 class="text-3xl font-bold font-heading mb-4">Faça Parte da Mudança</h2>
+    <p class="text-muted-foreground max-w-2xl mx-auto mb-8">
+      Cada item compartilhado é um passo em direção a um futuro mais sustentável e solidário.
+    </p>
+    <button mat-raised-button color="primary" routerLink="/postagens" class="px-10 py-3">
+      Começar Agora
+    </button>
   </section>
 </div>
